@@ -20,7 +20,7 @@ const keys: [string[], string][] = [
 ];
 
 const systems = [
-  { os: 'mac', name: 'macOS', icon: 'laptop', detail: 'Apple Silicon and Intel · .dmg' },
+  { os: 'mac', name: 'macOS', icon: 'laptop', detail: 'Apple Silicon · .dmg' },
   { os: 'win', name: 'Windows', icon: 'window', detail: '64-bit · installer' },
   { os: 'linux', name: 'Linux', icon: 'terminal', detail: 'AppImage · .deb · .rpm' },
 ] as const;
@@ -65,7 +65,7 @@ const jsonLd = {
       <div class="pitch">
         <h1>Tonic Player</h1>
         <p class="lede">A video player for local files and torrents, streamed while they download, with Chromecast and AirPlay.</p>
-        <ul class="systems" id="download" aria-label="Download">
+        <ul class="systems" id="download" aria-label="Download" data-repo={repo}>
           {
             systems.map((s) => (
               <li>
@@ -82,7 +82,7 @@ const jsonLd = {
           }
         </ul>
         <p class="note">
-          Free software, GPL-3.0-or-later · <a href={repo}>Source on GitHub</a>{' · '}<a href={`${repo}#install`}>Install notes</a>
+          <a data-os="macIntel" href={latest}>Intel Mac</a>{' · '}<a href={`${repo}#install`}>Install notes</a>{' · '}Free software, GPL-3.0-or-later · <a href={repo}>Source on GitHub</a>
         </p>
       </div>
     </section>
@@ -134,8 +134,10 @@ const jsonLd = {
   </footer>
 
   <script>
+    import { linkDownloads } from '../scripts/downloads';
     import { startHero } from '../scripts/hero';
     startHero();
+    linkDownloads(document.getElementById('download')!.dataset.repo!);
   </script>
 </Base>
 

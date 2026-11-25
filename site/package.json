@@ -10,6 +10,7 @@
     "dev": "pnpm build:fx && astro dev",
     "build": "pnpm build:fx && astro build",
     "preview": "astro preview",
+    "test": "node --test tests/",
     "test:mutants": "cd fx && cargo mutants -j 2"
   },
   "dependencies": {
