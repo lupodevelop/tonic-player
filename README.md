@@ -54,6 +54,12 @@ pnpm tauri build    # package
 pnpm test && cargo test --manifest-path src-tauri/Cargo.toml
 ```
 
+## Support
+
+<a href="https://ko-fi.com/lupodevelop"><img src="assets/ko-fi.gif" width="96" alt="Buy me a coffee on Ko-fi" /></a>
+
+If Tonic Player is useful to you, [a coffee on Ko-fi](https://ko-fi.com/lupodevelop) keeps it going.
+
 ## License
 
 [GPL-3.0-or-later](LICENSE). Bundles [FFmpeg](https://ffmpeg.org) (GPL build).
