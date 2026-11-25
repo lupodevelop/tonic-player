@@ -473,12 +473,11 @@ impl Engine {
                 let u = ((x as f32 - cx) / rad).clamp(-1.0, 1.0);
                 let mut th = u.asin() + a;
                 th = (th + PI).rem_euclid(TAU) - PI;
-                let front = th.cos() >= 0.0;
+                // A cell seen edge-on counts as front: at the row's ends cos is ±1 ulp from
+                // zero, and its sign differs between platforms' maths libraries.
+                let front = th.cos() >= -1e-6;
                 let sx = if front { cx + rad * th.sin() } else { cx - rad * th.sin() };
-                // A turning cylinder keeps its outline: the edge columns never move, so
-                // rounding in sin/asin cannot open a hole in the silhouette.
-                let col_x = if x == first || x == last { x } else { (sx.round() as usize).clamp(first, last) };
-                let src = y * self.w + col_x;
+                let src = y * self.w + (sx.round() as usize).clamp(first, last);
                 let (mut ch, mut col) = (self.target_ch[src], self.target_col[src]);
                 if !front {
                     ch = match col {

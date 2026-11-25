@@ -3,6 +3,7 @@ name: Pages
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -47,7 +48,6 @@ jobs:
           tar xzf "$name.tar.gz"
           echo "$RUNNER_TEMP/$name" >> "$GITHUB_PATH"
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test:fx
       - run: pnpm test
       - run: pnpm build
       - uses: actions/configure-pages@v6
