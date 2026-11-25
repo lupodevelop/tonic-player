@@ -33,12 +33,11 @@ pub struct Server {
     token: String,
 }
 
-/// 128 random bits as hex, from the OS-seeded keys of `RandomState`.
+/// 128 random bits from the OS, as hex.
 fn random_token() -> String {
-    use std::hash::BuildHasher;
-    let half =
-        || std::collections::hash_map::RandomState::new().hash_one(std::time::SystemTime::now());
-    format!("{:016x}{:016x}", half(), half())
+    let mut bytes = [0u8; 16];
+    getrandom::fill(&mut bytes).expect("the OS random source is unavailable");
+    bytes.iter().map(|b| format!("{b:02x}")).collect()
 }
 
 impl Server {
@@ -256,6 +255,19 @@ mod tests {
     use super::*;
     use axum::body::to_bytes;
     use std::io::Cursor;
+
+    #[test]
+    fn tokens_are_128_bit_hex_and_never_repeat() {
+        let tokens: std::collections::HashSet<String> = (0..1000).map(|_| random_token()).collect();
+        assert_eq!(tokens.len(), 1000);
+        for t in &tokens {
+            assert_eq!(t.len(), 32);
+            assert!(
+                t.bytes()
+                    .all(|b| b.is_ascii_hexdigit() && !b.is_ascii_uppercase())
+            );
+        }
+    }
 
     async fn get(range: Option<&str>) -> (StatusCode, HeaderMap, Vec<u8>) {
         let data: Vec<u8> = (0..=99).collect();

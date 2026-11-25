@@ -39,6 +39,7 @@
     ],
     "createUpdaterArtifacts": true,
     "externalBin": ["binaries/ffmpeg", "binaries/ffprobe"],
+    "macOS": { "signingIdentity": "-" },
     "category": "Video",
     "shortDescription": "Video player for files and torrents, with Chromecast",
     "copyright": "Copyright © 2026 Daniele",
