@@ -475,7 +475,10 @@ impl Engine {
                 th = (th + PI).rem_euclid(TAU) - PI;
                 let front = th.cos() >= 0.0;
                 let sx = if front { cx + rad * th.sin() } else { cx - rad * th.sin() };
-                let src = y * self.w + (sx.round() as usize).clamp(first, last);
+                // A turning cylinder keeps its outline: the edge columns never move, so
+                // rounding in sin/asin cannot open a hole in the silhouette.
+                let col_x = if x == first || x == last { x } else { (sx.round() as usize).clamp(first, last) };
+                let src = y * self.w + col_x;
                 let (mut ch, mut col) = (self.target_ch[src], self.target_col[src]);
                 if !front {
                     ch = match col {

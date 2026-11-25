@@ -5,4 +5,6 @@ exclude_re = [
   # The 60 s wait for a segment: > and >= differ by one instant, and == only
   # turns the timeout off, which a test would need a minute to see.
   "replace > with (==|>=) in Transcoder::segment",
+  # Whether VideoToolbox works depends on the machine's encoder hardware.
+  "replace videotoolbox_works -> bool with (true|false)",
 ]

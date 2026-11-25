@@ -558,6 +558,35 @@ fn find_tool(name: &str, beside: Option<&Path>) -> Option<PathBuf> {
         .find(|p| p.is_file())
 }
 
+/// Whether VideoToolbox encodes on this machine. Being in the build is not
+/// enough: a virtual Mac has no encoder hardware, so one frame is encoded
+/// with the software fallback off.
+fn videotoolbox_works(ffmpeg: &Path) -> bool {
+    tool_sync(ffmpeg)
+        .args([
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-f",
+            "lavfi",
+            "-i",
+            "testsrc2=size=256x144:rate=1",
+        ])
+        .args([
+            "-frames:v",
+            "1",
+            "-c:v",
+            "h264_videotoolbox",
+            "-allow_sw",
+            "0",
+            "-f",
+            "mpegts",
+            "-",
+        ])
+        .output()
+        .is_ok_and(|o| o.status.success())
+}
+
 /// Version and SPDX licence of an ffmpeg build from its `-version` output.
 /// The builder's `--extra-version` tag is cut off the version; `--enable-gpl`
 /// makes the build GPL, `--enable-version3` makes it version 3.
@@ -591,10 +620,7 @@ impl Transcoder {
         let beside = exe.as_deref().and_then(Path::parent);
         let ffmpeg = find_tool("ffmpeg", beside).context("ffmpeg not found")?;
         let ffprobe = find_tool("ffprobe", beside).context("ffprobe not found")?;
-        let hw = tool_sync(&ffmpeg)
-            .args(["-hide_banner", "-encoders"])
-            .output()
-            .is_ok_and(|o| String::from_utf8_lossy(&o.stdout).contains("h264_videotoolbox"));
+        let hw = videotoolbox_works(&ffmpeg);
         let version = tool_sync(&ffmpeg).arg("-version").output()?;
         let about = ffmpeg_about(&String::from_utf8_lossy(&version.stdout));
         // Segments of a previous run are never reused.
@@ -1272,6 +1298,11 @@ mod tests {
         ] {
             assert_eq!(parse_hls_name(bad), None, "{bad}");
         }
+    }
+
+    #[test]
+    fn no_ffmpeg_means_no_videotoolbox() {
+        assert!(!videotoolbox_works(Path::new("/nonexistent/ffmpeg")));
     }
 
     #[test]
