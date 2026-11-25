@@ -1,0 +1,601 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const demo = `${base}demo/`;
+// Chapters of the clip, in seconds.
+const chapters = [
+  { start: 0, title: 'Waking up' },
+  { start: 4.5, title: 'Flowers' },
+  { start: 15.5, title: 'Butterfly' },
+  { start: 20, title: 'Meadow' },
+];
+---
+
+<figure class="demo">
+  <div class="slot">
+    <p class="away">
+      Playing in the mini player. <button type="button" class="return">Bring it back</button>
+    </p>
+    <div
+      class="app"
+      id="demo"
+      tabindex="0"
+      aria-label="Demo of the Tonic Player window. Space plays or pauses, arrows seek, F full screen, P mini player."
+      data-thumbs={`${demo}thumbs.webp`}
+      data-thumb-step="0.5"
+      data-thumb-cols="10"
+      data-chapters={JSON.stringify(chapters)}
+    >
+      <video
+        muted
+        loop
+        autoplay
+        playsinline
+        preload="metadata"
+        poster={`${demo}poster.jpg`}
+        aria-label="Tonic Player playing a clip of Big Buck Bunny: a big rabbit sniffs flowers in a meadow while a butterfly flies around him."
+      >
+        <source src={`${demo}bbb.webm`} type="video/webm" />
+        <source src={`${demo}bbb.mp4`} type="video/mp4" />
+      </video>
+
+      <header>
+        <span class="lights">
+          <span class="light close" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="m3.8 3.8 4.4 4.4M8.2 3.8 3.8 8.2"></path></svg></span>
+          <span class="light min" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M3.3 6h5.4"></path></svg></span>
+          <span class="light max" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M6 3.3v5.4M3.3 6h5.4"></path></svg></span>
+        </span>
+        <span class="title">Big Buck Bunny</span>
+      </header>
+
+      <div class="corners">
+        <button class="icon mini-close" type="button" aria-label="Close the mini player">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+        </button>
+        <button class="icon mini-expand" type="button" aria-label="Back to the page">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"></path></svg>
+        </button>
+      </div>
+
+      <div class="bar paused">
+        <button class="icon back" type="button" aria-label="Back 10 seconds">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"></path><text x="12" y="15.5">10</text></svg>
+        </button>
+        <button class="icon big toggle" type="button" aria-label="Play">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="pause fill" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"></path>
+            <path class="play fill" d="M8 5v14l11-7z"></path>
+          </svg>
+        </button>
+        <button class="icon forward" type="button" aria-label="Forward 10 seconds">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v4h-4"></path><text x="12" y="15.5">10</text></svg>
+        </button>
+
+        <span class="clock now">0:00</span>
+        <div class="scrub" role="slider" tabindex="0" aria-label="Position" aria-valuemin="0" aria-valuemax="25" aria-valuenow="0" aria-valuetext="0:00">
+          <div class="track"><div class="buffered"></div><div class="played"></div></div>
+          <div class="ticks">
+            {chapters.slice(1).map((c) => <span style={`left: ${(c.start / 25) * 100}%`}></span>)}
+          </div>
+          <div class="preview" hidden aria-hidden="true">
+            <div class="thumb"></div>
+            <span class="chapter"></span>
+            <span class="when"></span>
+          </div>
+          <span class="knob"></span>
+        </div>
+        <span class="clock total">0:25</span>
+
+        <div class="audio">
+          <button class="icon mute" type="button" aria-label="Mute">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9h4l5-4v14l-5-4H4z"></path>
+              <path class="waves" d="M16 9a4 4 0 0 1 0 6"></path>
+              <path class="waves" d="M18.5 6.5a7.5 7.5 0 0 1 0 11"></path>
+              <path class="cross" d="m16 9 5 6m0-6-5 6"></path>
+            </svg>
+          </button>
+          <div class="volume" role="slider" tabindex="0" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">
+            <div class="track"><div class="volume-fill"></div></div>
+            <span class="volume-knob"></span>
+          </div>
+        </div>
+
+        <button class="icon nothere extra" type="button" aria-label="VR view" aria-describedby="demo-tip">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h15A1.5 1.5 0 0 1 21 8.5v7a1.5 1.5 0 0 1-1.5 1.5h-4l-2-3h-3l-2 3h-4A1.5 1.5 0 0 1 3 15.5z"></path><circle cx="8" cy="11.5" r="1.6"></circle><circle cx="16" cy="11.5" r="1.6"></circle></svg>
+        </button>
+        <button class="icon nothere extra" type="button" aria-label="AirPlay" aria-describedby="demo-tip">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><path class="fill" d="m12 15 5 6H7z"></path></svg>
+        </button>
+        <button class="icon nothere extra" type="button" aria-label="Chromecast" aria-describedby="demo-tip">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18a3 3 0 0 1 3 3M3 14a7 7 0 0 1 7 7M3 10a11 11 0 0 1 11 11"></path><path d="M3 7V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3"></path></svg>
+        </button>
+        <button class="icon mini" type="button" aria-label="Mini player" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><rect class="fill" x="12" y="12" width="7" height="5" rx="1"></rect></svg>
+        </button>
+        <button class="icon fullscreen extra" type="button" aria-label="Full screen">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg>
+        </button>
+      </div>
+      <span class="tip" id="demo-tip" role="tooltip" hidden>Not here! This is just a screenshot.</span>
+    </div>
+  </div>
+  <figcaption>Big Buck Bunny © 2008 Blender Foundation | <a href="https://www.bigbuckbunny.org">www.bigbuckbunny.org</a>, licensed <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</figcaption>
+</figure>
+
+<script>
+  import { startDemo } from '../scripts/demo';
+  startDemo(document.getElementById('demo')!);
+</script>
+
+<style>
+  .demo {
+    margin: 0;
+  }
+  figcaption {
+    margin-top: 0.9em;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .slot {
+    position: relative;
+    aspect-ratio: 16 / 9;
+  }
+  .away {
+    position: absolute;
+    inset: 0;
+    display: none;
+    place-content: center;
+    gap: 0.8em;
+    margin: 0;
+    text-align: center;
+    color: var(--muted);
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+  }
+  .slot.empty .away {
+    display: grid;
+  }
+  .return {
+    justify-self: center;
+    font: inherit;
+    color: var(--accent);
+    background: none;
+    border: 0;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
+
+  /* Mirrors the app window: black body, overlay title bar, floating glass control bar. */
+  .app {
+    --fg: rgb(255 255 255 / 0.92);
+    --dim: rgb(255 255 255 / 0.5);
+    --glass: rgb(28 28 30 / 0.72);
+    --edge: rgb(255 255 255 / 0.14);
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #000;
+    color: var(--fg);
+    font: 13px/1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    border-radius: 10px;
+    box-shadow:
+      0 0 0 0.5px rgb(0 0 0 / 0.6),
+      0 22px 70px 4px rgb(0 0 0 / 0.56);
+    user-select: none;
+  }
+  /* Inner light hairline drawn above the video, like a macOS window edge. */
+  .app::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+    pointer-events: none;
+  }
+  .app:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+  .app.idle {
+    cursor: none;
+  }
+  .app:fullscreen {
+    border-radius: 0;
+  }
+  video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+  }
+  button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+  [hidden] {
+    display: none !important;
+  }
+
+  header {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 38px;
+    display: flex;
+    align-items: flex-start;
+    padding: 0 84px;
+    background: linear-gradient(rgb(0 0 0 / 0.6), transparent);
+    transition: opacity 0.3s;
+  }
+  .title {
+    flex: 1;
+    line-height: 28px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lights {
+    position: absolute;
+    left: 20px;
+    top: 8px;
+    display: flex;
+    gap: 8px;
+  }
+  .light {
+    display: grid;
+    place-items: center;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 0.5px var(--rim);
+  }
+  .light svg {
+    width: 12px;
+    height: 12px;
+    fill: none;
+    stroke: rgb(0 0 0 / 0.55);
+    stroke-width: 1.1;
+    stroke-linecap: round;
+    opacity: 0;
+  }
+  .lights:hover svg,
+  .lights:focus-within svg {
+    opacity: 1;
+  }
+  .close {
+    --rim: #e0443e;
+    background: #ff5f57;
+  }
+  .min {
+    --rim: #dea123;
+    background: #febc2e;
+  }
+  .max {
+    --rim: #1aab29;
+    background: #28c840;
+  }
+  .app.inactive .light {
+    --rim: rgb(255 255 255 / 0.08);
+    background: #4d4d4f;
+  }
+
+  .bar {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    width: min(720px, calc(100% - 32px));
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--glass);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid var(--edge);
+    border-radius: 12px;
+    transition: opacity 0.3s;
+  }
+  .app.idle header,
+  .app.idle .bar,
+  .app.idle .corners {
+    opacity: 0;
+  }
+  .icon {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+  }
+  button.icon:hover {
+    background: var(--edge);
+  }
+  button.icon:focus-visible,
+  .scrub:focus-visible,
+  .volume:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  .icon svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .icon svg .fill {
+    fill: currentColor;
+    stroke: none;
+  }
+  .icon svg text {
+    font: 600 7px -apple-system, system-ui, sans-serif;
+    fill: currentColor;
+    stroke: none;
+    text-anchor: middle;
+  }
+  .icon.big svg {
+    width: 24px;
+    height: 24px;
+  }
+  .toggle .play,
+  .bar.paused .toggle .pause,
+  .mute .cross,
+  .bar.muted .mute .waves {
+    display: none;
+  }
+  .bar.paused .toggle .play,
+  .bar.muted .mute .cross {
+    display: inline;
+  }
+  .clock {
+    flex: none;
+    min-width: 42px;
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+
+  /* Seek bar layers: buffered, played; chapter ticks; hover preview. */
+  .scrub {
+    position: relative;
+    flex: 1;
+    min-width: 60px;
+    height: 22px;
+    cursor: pointer;
+    touch-action: none;
+    border-radius: 4px;
+  }
+  .track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 4px;
+    transform: translateY(-50%);
+    border-radius: 2px;
+    background: rgb(255 255 255 / 0.14);
+    overflow: hidden;
+  }
+  .scrub .track > div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+  }
+  .buffered {
+    background: rgb(209 243 15 / 0.6);
+  }
+  .played {
+    background: var(--fg);
+  }
+  .ticks span {
+    position: absolute;
+    top: 50%;
+    width: 2px;
+    height: 4px;
+    margin-left: -1px;
+    transform: translateY(-50%);
+    background: rgb(28 28 30 / 0.9);
+    pointer-events: none;
+  }
+  .knob {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.4);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+  }
+  .scrub:hover .knob,
+  .scrub:focus-visible .knob,
+  .scrub.dragging .knob {
+    opacity: 1;
+  }
+  .preview {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    width: 176px;
+    margin-left: -88px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: var(--glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--edge);
+    border-radius: 8px;
+    pointer-events: none;
+  }
+  .thumb {
+    width: 168px;
+    height: 94.5px;
+    border-radius: 5px;
+    background: #000 no-repeat;
+    background-size: 1680px 472.5px;
+  }
+  .chapter,
+  .when {
+    font-size: 12px;
+  }
+  .when {
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Volume: the slider opens next to the speaker while the pointer is over it. */
+  .audio {
+    flex: none;
+    display: flex;
+    align-items: center;
+  }
+  .volume {
+    position: relative;
+    width: 0;
+    height: 30px;
+    overflow: hidden;
+    cursor: pointer;
+    touch-action: none;
+    transition: width 0.18s ease;
+  }
+  .audio:hover .volume,
+  .audio:focus-within .volume,
+  .audio.adjusting .volume {
+    width: 84px;
+  }
+  .volume .track {
+    left: 8px;
+    right: 8px;
+    background: rgb(255 255 255 / 0.18);
+  }
+  .volume-fill {
+    height: 100%;
+    width: 80%;
+    background: var(--fg);
+  }
+  .volume-knob {
+    position: absolute;
+    top: 50%;
+    left: calc(8px + (100% - 16px) * 0.8);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.4);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .tip {
+    position: absolute;
+    z-index: 2;
+    padding: 5px 9px;
+    font-size: 12px;
+    white-space: nowrap;
+    background: var(--glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--edge);
+    border-radius: 8px;
+    transform: translate(-50%, -100%);
+    pointer-events: none;
+  }
+
+  .corners {
+    display: none;
+  }
+
+  /* Mini player: a small window in the corner with only play, seek and the way back. */
+  .app.mini {
+    position: fixed;
+    inset: auto 16px 16px auto;
+    z-index: 50;
+    width: min(320px, calc(100vw - 32px));
+    aspect-ratio: 16 / 9;
+  }
+  .app.mini header {
+    opacity: 0;
+  }
+  .app.mini .bar {
+    bottom: 8px;
+    width: calc(100% - 16px);
+    gap: 2px;
+    padding: 2px 6px;
+  }
+  .app.mini :is(.back, .forward, .clock, .audio, .nothere, .fullscreen) {
+    display: none;
+  }
+  .app.mini .mini {
+    color: var(--accent);
+  }
+  .app.mini .corners {
+    position: absolute;
+    inset: 6px 6px auto;
+    display: flex;
+    justify-content: space-between;
+    transition: opacity 0.3s;
+  }
+  .app.mini .corners .icon {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .app.mini .corners svg {
+    width: 16px;
+    height: 16px;
+  }
+  .app.mini .preview {
+    display: none !important;
+  }
+
+
+  @media (max-width: 640px) {
+    .extra {
+      display: none;
+    }
+    .app:not(.mini) .bar {
+      bottom: 10px;
+      width: calc(100% - 20px);
+      padding: 4px 6px;
+      gap: 2px;
+    }
+    header {
+      padding: 0 74px;
+    }
+    .lights {
+      left: 14px;
+    }
+  }
+  @media (max-width: 420px) {
+    .back,
+    .forward,
+    .audio {
+      display: none;
+    }
+    .clock {
+      min-width: 34px;
+      font-size: 12px;
+    }
+  }
+</style>

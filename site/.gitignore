@@ -1,0 +1,6 @@
+node_modules
+dist
+.astro
+fx/target
+src/fx-pkg
+fx/mutants.out*

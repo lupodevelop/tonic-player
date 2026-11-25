@@ -1,0 +1,26 @@
+---
+interface Props {
+  name: keyof typeof PATHS;
+}
+// 24px line icons on a 24 grid: stroke 1.5, round caps and joins, no fills.
+const PATHS = {
+  drop: 'M12 3v11M7.5 9.5 12 14l4.5-4.5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3',
+  stream: 'M8 4.5v9l7.5-4.5zM3 19.5h9M15 19.5h1.5M19.5 19.5h1.5',
+  film: 'M4 4h16v16H4zM8 4v16M16 4v16M4 8h4M4 12h4M4 16h4M16 8h4M16 12h4M16 16h4',
+  globe: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 3c-2.5 2.5-3.8 5.5-3.8 9s1.3 6.5 3.8 9M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9M3 12h18',
+  cast: 'M3 8V5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-6M3 12a8 8 0 0 1 8 8M3 16a4 4 0 0 1 4 4M3 20h.01',
+  airplay: 'M7 17H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-3M12 14l5 6H7z',
+  mini: 'M3 5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM12 12h6v5h-6z',
+  seek: 'M5 4h9v6H5zM3 16h18M9.5 10v6M7 13.5v5M16 13.5v5',
+  trash: 'M4 7h16M9.5 7V4.5h5V7M6 7l1 13h10l1-13M10 11v5M14 11v5',
+  laptop: 'M5 5h14v10H5zM3 19h18',
+  window: 'M3 4h18v16H3zM3 9h18M6 6.5h.01M8.5 6.5h.01',
+  terminal: 'M3 4h18v16H3zM7 10l3 2.5L7 15M12.5 15H17',
+  download: 'M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14',
+  code: 'M8.5 7 3.5 12l5 5M15.5 7l5 5-5 5',
+  shield: 'M12 3 5 6v5c0 4.4 2.9 8.4 7 10 4.1-1.6 7-5.6 7-10V6z',
+  upscale: 'M4 14v6h6M4 20l6-6M14 4h6v6M20 4l-6 6',
+} as const;
+---
+
+<svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d={PATHS[Astro.props.name]} /></svg>

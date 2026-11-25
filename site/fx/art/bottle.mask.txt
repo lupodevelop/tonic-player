@@ -1,0 +1,41 @@
+      cccccccccccccc
+     cccccccccccccccc
+     cccccccccccccccc
+      cc cc cc cc cc
+       dddddddddddd
+       cccccccccccc
+       ccggghggggcc
+       ccggggggggcc
+       cgghggggggcc
+       cggggggggggc
+      ccggggghggggc
+      cgggggggggggcc
+     ccgghgggggggggcc
+     cgggggggghgggggc
+    cgggggghgggggggggc
+   cggggggggggggggggggc
+  ccglggggggggghhhhhhhhc
+ ccllllllllllhhhhhhhhhhcc
+ cllllhlllllllllllllllllc
+ccddddddddddlllllllhllllc
+llddddddddddddddllllllllll
+llddddddddddddddddddddddll
+cccccccddddddddddddccccccc
+cccccccccccccccccccccccccc
+cccccccccccccccccccccccccc
+ccccccccc   cccccccccccccc
+ccccccccc      ccccccccccc
+ccccccccc         cccccccc
+ccccccccc         cccccccc
+ccccccccc      ccccccccccc
+ccccccccc   cccccccccccccc
+cccccccccccccccccccccccccc
+lccccccccccccccccccccccccd
+llldddddhddddddddddddddlll
+lllddddddddddddddddddddlll
+llldddddddddddddhddddddlll
+lllddddddddhdddddddddddlll
+llldddddddddddddddddhddll
+ llddddddddddddddddddddll
+ lllldddddddddddddddddlll
+   llllllllllllllllllll

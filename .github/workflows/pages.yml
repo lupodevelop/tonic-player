@@ -1,0 +1,65 @@
+name: Pages
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: site/package.json
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: site/fx
+      # The CLI must match the wasm-bindgen crate version locked in Cargo.lock.
+      - name: Install wasm-bindgen-cli
+        run: |
+          v=$(awk '/^name = "wasm-bindgen"$/ { getline; gsub(/"/, "", $3); print $3 }' fx/Cargo.lock)
+          name="wasm-bindgen-$v-x86_64-unknown-linux-musl"
+          url="https://github.com/wasm-bindgen/wasm-bindgen/releases/download/$v/$name.tar.gz"
+          cd "$RUNNER_TEMP"
+          curl -sSfLO "$url"
+          echo "$(curl -sSfL "$url.sha256sum" | cut -d' ' -f1)  $name.tar.gz" | sha256sum -c -
+          tar xzf "$name.tar.gz"
+          echo "$RUNNER_TEMP/$name" >> "$GITHUB_PATH"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test:fx
+      - run: pnpm build
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

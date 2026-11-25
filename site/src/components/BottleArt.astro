@@ -1,0 +1,40 @@
+---
+import art from '../../fx/art/bottle.txt?raw';
+import mask from '../../fx/art/bottle.mask.txt?raw';
+
+interface Props {
+  class?: string;
+}
+const NAMES: Record<string, string> = { c: 'cream', l: 'lime', h: 'hi', d: 'dlime', g: 'glass' };
+const artLines = art.trimEnd().split('\n');
+const maskLines = mask.trimEnd().split('\n');
+// Groups each row into runs of one colour so the static drawing keeps the palette.
+const rows = artLines.map((line, r) => {
+  const chars = [...line];
+  const colors = [...(maskLines[r] ?? '')];
+  const runs: { text: string; cls?: string }[] = [];
+  chars.forEach((ch, i) => {
+    const cls = NAMES[colors[i] ?? ' '];
+    const lastRun = runs[runs.length - 1];
+    if (lastRun && lastRun.cls === cls) lastRun.text += ch;
+    else runs.push({ text: ch, cls });
+  });
+  return runs;
+});
+---
+
+<pre class:list={['bottle-art', Astro.props.class]} role="img" aria-label="A lime soda bottle drawn in text characters, with a play button on its label">{rows.map((runs) => <Fragment>{runs.map((run) => (run.cls ? <span class={run.cls}>{run.text}</span> : run.text))}{'\n'}</Fragment>)}</pre>
+
+<style>
+  .bottle-art {
+    margin: 0;
+    font: 400 var(--art-px, 11px) / 1.12 var(--mono);
+    letter-spacing: 0;
+    white-space: pre;
+  }
+  .cream { color: var(--cream); }
+  .lime { color: #d1f30f; }
+  .hi { color: #e4fa43; }
+  .dlime { color: #98cc04; }
+  .glass { color: #3d7a1e; }
+</style>

@@ -1,0 +1,121 @@
+---
+import Base from '../layouts/Base.astro';
+import BottleArt from '../components/BottleArt.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const effects = ['fizz', 'decode', 'pour', 'spin', '360°'];
+---
+
+<Base
+  title="Tonic Player · screensaver"
+  description="The Tonic Player bottle, assembled by text effects, full screen."
+  bodyClass="ss"
+>
+  <main class="saver" id="saver">
+    <h1 class="sr-only">Tonic Player screensaver</h1>
+    <div class="stagefs">
+      <BottleArt class="fallback" />
+      <canvas aria-hidden="true"></canvas>
+    </div>
+    <div class="ui">
+      <a class="back" href={base}>← tonic player</a>
+      <div class="pick" role="group" aria-label="Effect">
+        {
+          effects.map((name, i) => (
+            <button type="button" data-fx={i} aria-pressed={i === 0 ? 'true' : 'false'}>
+              <span aria-hidden="true">{i + 1}</span> {name}
+            </button>
+          ))
+        }
+        <button type="button" class="cycle" aria-pressed="true">cycle</button>
+      </div>
+      <p class="help">1–5 effect · F full screen · space pause · click to pop · drag in 360°</p>
+    </div>
+  </main>
+  <script>
+    import { startScreensaver } from '../scripts/screensaver';
+    startScreensaver();
+  </script>
+</Base>
+
+<style is:global>
+  body.ss {
+    overflow: hidden;
+  }
+  .saver {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  .saver:fullscreen {
+    background: var(--bg);
+  }
+  .stagefs {
+    display: grid;
+    place-items: center;
+    --art-px: min(1.6vh, 2.6vw);
+  }
+  .stagefs > * {
+    grid-area: 1 / 1;
+  }
+  .stagefs canvas {
+    display: none;
+    touch-action: none;
+  }
+  .stagefs.live canvas {
+    display: block;
+  }
+  .stagefs.live .fallback {
+    visibility: hidden;
+  }
+  .ui {
+    position: fixed;
+    inset: auto 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6em 1.4em;
+    padding: 12px 16px;
+    font-size: 0.85em;
+    background: linear-gradient(transparent, rgb(15 16 14 / 0.9));
+    transition: opacity 0.6s;
+    z-index: 45;
+  }
+  .ui.idle:not(:focus-within) {
+    opacity: 0;
+  }
+  .back {
+    font-weight: 700;
+  }
+  .pick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .pick button {
+    font: inherit;
+    padding: 0.3em 0.7em;
+    color: var(--accent);
+    background: rgb(15 16 14 / 0.8);
+    border: 1px solid var(--line);
+    cursor: pointer;
+  }
+  .pick button span {
+    color: var(--muted);
+  }
+  .pick button[aria-pressed='true'] {
+    color: var(--bg);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .pick button[aria-pressed='true'] span {
+    color: var(--bg);
+  }
+  .help {
+    margin: 0;
+    color: var(--muted);
+  }
+</style>

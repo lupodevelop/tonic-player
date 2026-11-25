@@ -1,0 +1,8 @@
+# Mutants no unit test can catch without depending on the machine or the clock.
+exclude_re = [
+  # lan_ip only reads the OS interface list; the choice itself is pick_lan_ip, tested.
+  "delete match arm if_addrs::IfAddr::V4\\(a\\) in lan_ip",
+  # The 60 s wait for a segment: > and >= differ by one instant, and == only
+  # turns the timeout off, which a test would need a minute to see.
+  "replace > with (==|>=) in Transcoder::segment",
+]

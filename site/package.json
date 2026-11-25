@@ -1,0 +1,18 @@
+{
+  "name": "tonic-player-site",
+  "private": true,
+  "type": "module",
+  "license": "GPL-3.0-or-later",
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "build:fx": "cd fx && cargo build --release --target wasm32-unknown-unknown -j 4 && wasm-bindgen --target web --out-dir ../src/fx-pkg target/wasm32-unknown-unknown/release/tonic_fx.wasm",
+    "test:fx": "cargo test --manifest-path fx/Cargo.toml -j 4",
+    "dev": "pnpm build:fx && astro dev",
+    "build": "pnpm build:fx && astro build",
+    "preview": "astro preview",
+    "test:mutants": "cd fx && cargo mutants -j 2"
+  },
+  "dependencies": {
+    "astro": "7.4.13"
+  }
+}

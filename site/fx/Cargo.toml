@@ -1,0 +1,17 @@
+[package]
+name = "tonic-fx"
+version = "0.1.0"
+edition = "2024"
+license = "GPL-3.0-or-later"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "=0.2.130"
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+  </defs>
+
+  <!-- macOS icon grid: 824 px rounded square centred on a 1024 px canvas. -->
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="#ffffff" />
+  <rect x="100.5" y="100.5" width="823" height="823" rx="184.5" fill="none" stroke="#0a1c12" stroke-opacity="0.18" stroke-width="3" />
+
+  <g transform="translate(512 512) rotate(16) scale(0.68) translate(-600 -650)">
+<defs>
+    <!-- Cream glass outline fading into the lime body. -->
+    <linearGradient id="shell" x1="0" y1="252" x2="0" y2="1197" gradientUnits="userSpaceOnUse">
+      <stop offset="0.42" stop-color="#faf1de" />
+      <stop offset="0.42" stop-color="#d1f30f" />
+    </linearGradient>
+    <clipPath id="glass">
+      <path d="M532 284C560 279 640 279 668 284C668 350 672 410 706 470C735 525 772 580 775 650V1110C775 1150 745 1175 700 1175H500C455 1175 425 1150 425 1110V650C428 580 465 525 494 470C528 410 532 350 532 284Z" />
+    </clipPath>
+  </defs>
+
+  <path fill="url(#shell)" stroke="#143020" stroke-width="26" stroke-linejoin="round" d="M510 252H690C690 330 692 400 728 470C760 535 797 575 797 650V1100C797 1160 760 1197 700 1197H500C440 1197 403 1160 403 1100V650C403 575 440 535 472 470C508 400 510 330 510 252Z" />
+
+  <g clip-path="url(#glass)">
+    <rect x="400" y="270" width="400" height="950" fill="#1d450c" />
+    <path fill="#d1f30f" d="M400 575C455 545 525 552 590 580C650 548 705 522 800 535V1220H400Z" />
+    <path fill="#e4fa43" d="M590 580C650 606 725 612 800 586V535C705 522 650 548 590 580Z" />
+    <path fill="#98cc04" d="M400 640C465 606 535 610 600 640C665 670 725 676 800 660V1220H400Z" />
+    <circle cx="621" cy="365" r="19" fill="#e2fa3e" />
+    <circle cx="590" cy="415" r="11" fill="#e2fa3e" />
+    <circle cx="640" cy="463" r="23" fill="#e2fa3e" />
+    <circle cx="587" cy="512" r="14" fill="#e2fa3e" />
+  </g>
+
+  <path fill="#d1f30f" d="M403 960H797V1100C797 1160 760 1197 700 1197H500C440 1197 403 1160 403 1100Z" />
+  <path fill="#a2d706" d="M447 960H757V1105C757 1148 725 1175 680 1175H524C479 1175 447 1148 447 1105Z" />
+
+  <path fill="#f9f2e2" d="M403 697C520 722 680 722 797 697V968C680 1003 520 1003 403 968Z" />
+  <path fill="#142e1f" stroke="#142e1f" stroke-width="34" stroke-linejoin="round" d="M547 785V925L671 853Z" />
+
+  <rect x="488" y="192" width="222" height="63" rx="17" fill="#143020" />
+  <path fill="#faf1de" stroke="#143020" stroke-width="26" stroke-linejoin="round" d="M480 200C468 150 500 116 562 115H638C700 116 732 150 720 200A24 20 0 0 1 672 200A24 20 0 0 1 624 200A24 20 0 0 1 576 200A24 20 0 0 1 528 200A24 20 0 0 1 480 200Z" />
+  </g>
+</svg>

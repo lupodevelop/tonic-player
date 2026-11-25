@@ -1,0 +1,55 @@
+[package]
+name = "tonic-player"
+version = "0.1.0"
+description = "Desktop video player for local files and torrents, with Chromecast support"
+edition = "2024"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/lupodevelop/tonic-player"
+
+[lib]
+# Distinct from the binary name; see rust-lang/cargo#8519.
+name = "tonic_player_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+librqbit = { version = "9.1.0", default-features = false, features = ["default-tls"] }
+rust_cast = "0.21.0"
+mdns-sd = "0.22.0"
+axum = "0.8.9"
+tokio-util = { version = "0.7.20", features = ["io"] }
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "net", "io-util", "fs", "process", "time"] }
+anyhow = "1.0.105"
+tauri-plugin-dialog = "2"
+tauri-plugin-deep-link = "2"
+if-addrs = "0.15.0"
+url = "2.5.9"
+tauri-plugin-updater = "2"
+tauri-plugin-process = "2"
+tauri-plugin-opener = "2"
+
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros"] }
+protobuf = "=3.7.2"
+rcgen = "0.14.10"
+rust_cast = { version = "0.21.0", features = ["cast"] }
+rustls = "0.23"
+
+[target.'cfg(any(target_os = "linux", target_os = "windows"))'.dependencies]
+tauri-plugin-single-instance = { version = "2", features = ["deep-link"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2-app-kit = { version = "0.3.2", default-features = false, features = ["NSWindow", "NSButton", "NSControl", "NSResponder", "NSView", "std"] }
