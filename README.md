@@ -7,8 +7,7 @@
 <p align="center">Video player for local files and torrents, streamed while they download, with Chromecast and AirPlay.</p>
 
 <p align="center">
-  <a href="https://github.com/lupodevelop/tonic-player/releases">Download</a> ·
-  <a href="https://ko-fi.com/lupodevelop">Support on Ko-fi</a>
+  <a href="https://github.com/lupodevelop/tonic-player/releases">Download</a>
 </p>
 
 <p align="center">
@@ -54,12 +53,12 @@ pnpm tauri build    # package
 pnpm test && cargo test --manifest-path src-tauri/Cargo.toml
 ```
 
+## License
+
+[GPL-3.0-or-later](LICENSE). Bundles [FFmpeg](https://ffmpeg.org) (GPL build).
+
 ## Support
 
 <a href="https://ko-fi.com/lupodevelop"><img src="assets/ko-fi.gif" width="96" alt="Buy me a coffee on Ko-fi" /></a>
 
 If Tonic Player is useful to you, [a coffee on Ko-fi](https://ko-fi.com/lupodevelop) keeps it going.
-
-## License
-
-[GPL-3.0-or-later](LICENSE). Bundles [FFmpeg](https://ffmpeg.org) (GPL build).
