@@ -122,7 +122,7 @@ cd "$work/src/ffmpeg-$version"
   --enable-filter=scale,format,v360,aresample,aformat,null,anull,testsrc2,sine \
   --enable-indev=lavfi \
   ${platform[@]+"${platform[@]}"}
-make -j"$jobs" ffmpeg ffprobe
+make -j"$jobs" "ffmpeg$exe" "ffprobe$exe"
 
 # make leaves stripped ffmpeg/ffprobe next to the unstripped *_g.
 for tool in ffmpeg ffprobe; do
