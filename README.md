@@ -55,7 +55,7 @@ pnpm test && cargo test --manifest-path src-tauri/Cargo.toml
 
 ## License
 
-[GPL-3.0-or-later](LICENSE). Bundles [FFmpeg](https://ffmpeg.org) (GPL build).
+[GPL-3.0-or-later](LICENSE). Bundles [FFmpeg](https://ffmpeg.org), built in [tonic-player-ffmpeg](https://github.com/lupodevelop/tonic-player-ffmpeg).
 
 ## Support
 

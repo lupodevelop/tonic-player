@@ -2,15 +2,15 @@
   "aarch64-apple-darwin": {
     "version": "9.1",
     "licence": "GPL-3.0-or-later",
-    "build": "https://github.com/lupodevelop/tonic-player/blob/ffmpeg-9.1/scripts/build-ffmpeg.sh",
-    "source": "https://github.com/lupodevelop/tonic-player/releases/tag/ffmpeg-9.1",
+    "build": "https://github.com/lupodevelop/tonic-player-ffmpeg/blob/ffmpeg-9.1/scripts/build-ffmpeg.sh",
+    "source": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/tag/ffmpeg-9.1",
     "files": {
       "ffmpeg": {
-        "url": "https://github.com/lupodevelop/tonic-player/releases/download/ffmpeg-9.1/ffmpeg-aarch64-apple-darwin",
+        "url": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/download/ffmpeg-9.1/ffmpeg-aarch64-apple-darwin",
         "sha256": "63bf76b69b18fea2249ae2da95217bccadb3ac8e0c04954cbb78af40abc05def"
       },
       "ffprobe": {
-        "url": "https://github.com/lupodevelop/tonic-player/releases/download/ffmpeg-9.1/ffprobe-aarch64-apple-darwin",
+        "url": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/download/ffmpeg-9.1/ffprobe-aarch64-apple-darwin",
         "sha256": "3e0cc47d3a3ef09abe923e228bbeec017ec0ba69efc68c7becd5d525d0fcd286"
       }
     }
@@ -18,15 +18,15 @@
   "x86_64-apple-darwin": {
     "version": "9.1",
     "licence": "GPL-3.0-or-later",
-    "build": "https://github.com/lupodevelop/tonic-player/blob/ffmpeg-9.1/scripts/build-ffmpeg.sh",
-    "source": "https://github.com/lupodevelop/tonic-player/releases/tag/ffmpeg-9.1",
+    "build": "https://github.com/lupodevelop/tonic-player-ffmpeg/blob/ffmpeg-9.1/scripts/build-ffmpeg.sh",
+    "source": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/tag/ffmpeg-9.1",
     "files": {
       "ffmpeg": {
-        "url": "https://github.com/lupodevelop/tonic-player/releases/download/ffmpeg-9.1/ffmpeg-x86_64-apple-darwin",
+        "url": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/download/ffmpeg-9.1/ffmpeg-x86_64-apple-darwin",
         "sha256": "5cda627ccfe7ffd939a55dc1439b27027eb3d286d87b2990fc97311abc501e3d"
       },
       "ffprobe": {
-        "url": "https://github.com/lupodevelop/tonic-player/releases/download/ffmpeg-9.1/ffprobe-x86_64-apple-darwin",
+        "url": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/download/ffmpeg-9.1/ffprobe-x86_64-apple-darwin",
         "sha256": "041adc57c149a5d58c75d4872636bdb6fc06a1d673a3b2b8e7c82c47dff3b4ed"
       }
     }
@@ -34,15 +34,15 @@
   "x86_64-pc-windows-msvc": {
     "version": "9.1",
     "licence": "GPL-3.0-or-later",
-    "build": "https://github.com/lupodevelop/tonic-player/blob/ffmpeg-9.1/scripts/build-ffmpeg.sh",
-    "source": "https://github.com/lupodevelop/tonic-player/releases/tag/ffmpeg-9.1",
+    "build": "https://github.com/lupodevelop/tonic-player-ffmpeg/blob/ffmpeg-9.1/scripts/build-ffmpeg.sh",
+    "source": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/tag/ffmpeg-9.1",
     "files": {
       "ffmpeg": {
-        "url": "https://github.com/lupodevelop/tonic-player/releases/download/ffmpeg-9.1/ffmpeg-x86_64-pc-windows-msvc.exe",
+        "url": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/download/ffmpeg-9.1/ffmpeg-x86_64-pc-windows-msvc.exe",
         "sha256": "ccf494b38a420c856f4e916f081ad84a7f9ff4e64a7feaa2cac73209845f7729"
       },
       "ffprobe": {
-        "url": "https://github.com/lupodevelop/tonic-player/releases/download/ffmpeg-9.1/ffprobe-x86_64-pc-windows-msvc.exe",
+        "url": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/download/ffmpeg-9.1/ffprobe-x86_64-pc-windows-msvc.exe",
         "sha256": "44c0828456b9179329d56b60414394a752cf98c85a942b6bab26c97f0e17080d"
       }
     }
@@ -50,15 +50,15 @@
   "x86_64-unknown-linux-gnu": {
     "version": "9.1",
     "licence": "GPL-3.0-or-later",
-    "build": "https://github.com/lupodevelop/tonic-player/blob/ffmpeg-9.1/scripts/build-ffmpeg.sh",
-    "source": "https://github.com/lupodevelop/tonic-player/releases/tag/ffmpeg-9.1",
+    "build": "https://github.com/lupodevelop/tonic-player-ffmpeg/blob/ffmpeg-9.1/scripts/build-ffmpeg.sh",
+    "source": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/tag/ffmpeg-9.1",
     "files": {
       "ffmpeg": {
-        "url": "https://github.com/lupodevelop/tonic-player/releases/download/ffmpeg-9.1/ffmpeg-x86_64-unknown-linux-gnu",
+        "url": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/download/ffmpeg-9.1/ffmpeg-x86_64-unknown-linux-gnu",
         "sha256": "3ee6095f7df2392f2c7358bc816dab439860949b6f234dfc69ef65a25e57fbdf"
       },
       "ffprobe": {
-        "url": "https://github.com/lupodevelop/tonic-player/releases/download/ffmpeg-9.1/ffprobe-x86_64-unknown-linux-gnu",
+        "url": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/download/ffmpeg-9.1/ffprobe-x86_64-unknown-linux-gnu",
         "sha256": "bd992cd174bf6fdababe801e35b89b70236af84d14953b763a4f5a4f3b35e78b"
       }
     }
@@ -66,15 +66,15 @@
   "aarch64-unknown-linux-gnu": {
     "version": "9.1",
     "licence": "GPL-3.0-or-later",
-    "build": "https://github.com/lupodevelop/tonic-player/blob/ffmpeg-9.1/scripts/build-ffmpeg.sh",
-    "source": "https://github.com/lupodevelop/tonic-player/releases/tag/ffmpeg-9.1",
+    "build": "https://github.com/lupodevelop/tonic-player-ffmpeg/blob/ffmpeg-9.1/scripts/build-ffmpeg.sh",
+    "source": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/tag/ffmpeg-9.1",
     "files": {
       "ffmpeg": {
-        "url": "https://github.com/lupodevelop/tonic-player/releases/download/ffmpeg-9.1/ffmpeg-aarch64-unknown-linux-gnu",
+        "url": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/download/ffmpeg-9.1/ffmpeg-aarch64-unknown-linux-gnu",
         "sha256": "4973ff177f5e2d6576535c90636073ad3180fc1ae6129a834fd9c2390465859a"
       },
       "ffprobe": {
-        "url": "https://github.com/lupodevelop/tonic-player/releases/download/ffmpeg-9.1/ffprobe-aarch64-unknown-linux-gnu",
+        "url": "https://github.com/lupodevelop/tonic-player-ffmpeg/releases/download/ffmpeg-9.1/ffprobe-aarch64-unknown-linux-gnu",
         "sha256": "150f1baf1caade8bf7be6dd39b388e42d97835bb340479435494af07538479cc"
       }
     }
